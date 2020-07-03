@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from './model/user';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json'
@@ -19,7 +20,7 @@ export class UserServiceService {
 
   getValidateUser(req: any) {
 
-    this.http.post<User[]>('http://localhost:8080/validateUser', req, httpOptions).subscribe(data => {
+    this.http.post<User[]>(environment.host + 'validateUser', req, httpOptions).subscribe(data => {
       this.getValidateUserSub.next(data);
     });
 

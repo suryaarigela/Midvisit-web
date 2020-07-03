@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { Speciality } from './model/speciality';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Doctor } from './model/doctor';
+import { environment } from 'src/environments/environment';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -21,7 +22,7 @@ export class DoctorsService {
 
   getAllDoctor(speciality: string) {
 
-    this.http.post<Doctor[]>('http://localhost:8080/getDoctors', speciality, httpOptions).subscribe(data => {
+    this.http.post<Doctor[]>(environment.host + 'getDoctors', speciality, httpOptions).subscribe(data => {
       this.getAllDoctorsSub.next(data);
     });
 
