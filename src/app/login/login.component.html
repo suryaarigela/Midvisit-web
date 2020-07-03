@@ -1,0 +1,28 @@
+<div class="main-div">
+  <mat-card>
+    <mat-card-title>
+      Login
+    </mat-card-title>
+    <mat-card-content>
+      <form [formGroup]="loginForm">
+
+
+        <mat-form-field>
+          <input formControlName="username" matInput placeholder="User Name">
+        </mat-form-field>
+        <br />
+        <mat-form-field>
+          <input type="password" formControlName="password" matInput placeholder="Password" />
+        </mat-form-field>
+      </form>
+      <div *ngIf="!firstTime" style="color: red;">Please enter valid credentials</div>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <div class="button-flex-container">
+        <button mat-raised-button color="primary" (click)="login()">Login</button>
+        <button mat-raised-button color="primary" (click)="signUp()">Register</button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+</div>

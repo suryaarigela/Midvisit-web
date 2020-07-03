@@ -1,0 +1,62 @@
+<div style="float: right;" *ngIf="showButtons()">
+  <mat-card-actions>
+    <div class="button-flex-container homeButton">
+      <button mat-raised-button color="primary" (click)="login()">Login</button>
+      <button mat-raised-button color="primary" (click)="signUp()">Register</button>
+    </div>
+  </mat-card-actions>
+</div>
+<div class="container row">
+  <div class="col-md-6" style="margin-left: 10px;">
+    <h1>Search</h1>
+    <input type="search" class="mat-elevation-z2" [matAutocomplete]="auto" [formControl]="searchControl">
+
+    <div>
+      <mat-autocomplete #auto="matAutocomplete" class="mat-elevation-z2">
+        <mat-option *ngFor="let item of filteredResults$ | async" [value]="item">
+          <span [innerHTML]="item | bold:searchControl.value"></span>
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+
+
+  </div>
+  <div class="col-md-6" style="margin-left: 10px;">
+    <button mat-raised-button color="primary" (click)="searchDoc()">Search</button>
+  </div>
+</div>
+<section id="authors" class="my-5 text-center">
+  <div class="container">
+    <div class="row">
+      <div *ngFor="let doc of doctors ; let ind=index" style="margin-bottom: 30px;" class="col-lg-6 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <img src="assets/images/{{ind}}.jpg" alt="" class="img-fluid rounded-circle w-50 mb-3">
+            <h3>{{doc.name}}</h3>
+            <h5 class="text-muted">{{searchControl.value}}</h5>
+            <p>{{doc.description}}
+            </p>
+            <div class="d-flex justify-content-center">
+              <div class="p-4">
+                <a href="http://facebook.com">
+                  <i class="fab fa-facebook"></i>
+                </a>
+              </div>
+              <div class="p-4">
+                <a href="http://twitter.com">
+                  <i class="fab fa-twitter"></i>
+                </a>
+              </div>
+              <div class="p-4">
+                <a href="http://instagram.com">
+                  <i class="fab fa-instagram"></i>
+                </a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
