@@ -1,17 +1,18 @@
+<div style="background-image: url('assets/images/sign up_image.jpg'); background-repeat: no-repeat;">
 <div class="main-div">
-  <mat-card>
+  <mat-card class = "login">
     <mat-card-title>
-      Login
+      <h1 class = "title">Welcome to MedVisit  </h1>
     </mat-card-title>
-    <mat-card-content>
+    <hr>
+    <mat-card-content class = "signContent">
       <form [formGroup]="loginForm">
 
-
-        <mat-form-field>
+        <mat-form-field class = "col-sm-12" appearance="outline">
           <input formControlName="username" matInput placeholder="User Name">
         </mat-form-field>
         <br />
-        <mat-form-field>
+        <mat-form-field class = "col-sm-12" appearance="outline">
           <input type="password" formControlName="password" matInput placeholder="Password" />
         </mat-form-field>
       </form>
@@ -20,9 +21,14 @@
 
     <mat-card-actions>
       <div class="button-flex-container">
-        <button mat-raised-button color="primary" (click)="login()">Login</button>
-        <button mat-raised-button color="primary" (click)="signUp()">Register</button>
+        <button class = "col-sm-12" mat-raised-button color="primary" (click)="login()">Login</button>
+        <div class = "col-sm-12 signContent">
+        <span class = "col-sm-6">New to MedVisit? </span>
+          <span class ="col-sm-6 signup" (click)="signUp()"> Sign Up Now</span>
+        </div>
+
       </div>
     </mat-card-actions>
   </mat-card>
+</div>
 </div>
