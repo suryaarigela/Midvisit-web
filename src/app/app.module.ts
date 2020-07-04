@@ -64,6 +64,7 @@ import { SettingsComponent } from './settings/settings.component';
     MatIconModule,
     MatCardModule,
     MatFormFieldModule,
+    MatCheckboxModule,
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
