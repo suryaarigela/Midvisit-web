@@ -38,15 +38,22 @@ export class HomeComponent implements OnInit {
   }
 
   searchControl: FormControl;
-
+  insuranceSearch: FormControl;
   filteredResults$: Observable<string[]>;
+  filteredInsuResults$: Observable<string[]>;
   results: string[] = []
-
+  insuresults: string[] = ['United Health Group', 'Sigma', 'My Health']
   constructor(private readonly router: Router,
     private readonly specialityServ: SpecialitySerService, private readonly shared: SharedServService, private readonly docServ: DoctorsService) {
     this.searchControl = new FormControl('');
+    this.insuranceSearch = new FormControl('');
     this.filteredResults$ = this.searchControl.valueChanges.pipe(
       map(val => this.filterResults(val)),
+      map(val => val.slice(0, 4)))
+      ;
+
+    this.filteredInsuResults$ = this.insuranceSearch.valueChanges.pipe(
+      map(val => this.filterInsuResults(val)),
       map(val => val.slice(0, 4)))
       ;
 
@@ -63,6 +70,10 @@ export class HomeComponent implements OnInit {
 
   private filterResults(val: string): string[] {
     return val ? this.results.filter(v => v.toLowerCase().indexOf(val.toLowerCase()) === 0) : [];
+  }
+
+  private filterInsuResults(val: string): string[] {
+    return val ? this.insuresults.filter(v => v.toLowerCase().indexOf(val.toLowerCase()) === 0) : [];
   }
 
   searchDoc() {

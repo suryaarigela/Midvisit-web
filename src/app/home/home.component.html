@@ -6,10 +6,11 @@
     </div>
   </mat-card-actions>
 </div>
-<div class="container row">
-  <div class="col-md-6" style="margin-left: 10px;">
-    <h1>Search</h1>
-    <input type="search" class="mat-elevation-z2" [matAutocomplete]="auto" [formControl]="searchControl">
+<h1>Search</h1>
+<div class="row">
+  <div class="col-md-3" style="margin-left: 10px;">
+    <input type="search" class="mat-elevation-z2" placeholder="Select Specialization" [matAutocomplete]="auto"
+      [formControl]="searchControl">
 
     <div>
       <mat-autocomplete #auto="matAutocomplete" class="mat-elevation-z2">
@@ -21,9 +22,35 @@
 
 
   </div>
-  <div class="col-md-6" style="margin-left: 10px;">
-    <button mat-raised-button color="primary" (click)="searchDoc()">Search</button>
+  <div class="col-md-3" style="margin-left: 10px;">
+
+    <input type="search" placeholder="Select Insurance" class="mat-elevation-z2" [matAutocomplete]="autoInsu"
+      [formControl]="insuranceSearch">
+
+    <div>
+      <mat-autocomplete #autoInsu="matAutocomplete" class="mat-elevation-z2">
+        <mat-option *ngFor="let item of filteredInsuResults$ | async" [value]="item">
+          <span [innerHTML]="item | bold:insuranceSearch.value"></span>
+        </mat-option>
+      </mat-autocomplete>
+    </div>
+
+
   </div>
+  <div class="col-md-2" style="margin-left: 10px;">
+
+    <input type="search" class="mat-elevation-z2" placeholder="Enter Zip Code" [formControl]="zipSearch">
+
+  </div>
+  <div class="col-md-2" style="margin-left: 10px;">
+
+    <button mat-raised-button color="primary" (click)="searchDoc()">Search</button>
+
+  </div>
+
+  <!-- <div class="col-md-4" style="margin-left: 10px;">
+    <button mat-raised-button color="primary" (click)="searchDoc()">Search</button>
+  </div> -->
 </div>
 <section id="authors" class="my-5 text-center">
   <div class="container">
