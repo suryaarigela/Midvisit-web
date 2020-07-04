@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserServiceService } from '../user-service.service';
 
 @Component({
   selector: 'app-signup',
@@ -10,7 +11,12 @@ import { Router } from '@angular/router';
 export class SignupComponent implements OnInit {
 
   signUpForm: FormGroup;
-  constructor(private readonly router: Router) { }
+  constructor(private readonly router: Router, private readonly userServ: UserServiceService) {
+
+    this.userServ.signUp$.subscribe(() => {
+      console.log('successfuly created')
+    })
+  }
 
   ngOnInit() {
     this.signUpForm = new FormGroup({
@@ -23,6 +29,12 @@ export class SignupComponent implements OnInit {
   }
 
   signUp() {
+    this.userServ.signUpUser({
+      userName: this.signUpForm.get('userName').value,
+      password: this.signUpForm.get('password').value,
+      email: this.signUpForm.get('email').value,
+      phoneNr: this.signUpForm.get('phoneNr').value,
+    })
     this.router.navigate(['login'])
   }
 

@@ -15,6 +15,9 @@ export class UserServiceService {
   private getValidateUserSub = new BehaviorSubject<User[]>(null);
   getValidateUser$ = this.getValidateUserSub.asObservable();
 
+  private signUpSub = new BehaviorSubject<User>(null);
+  signUp$ = this.signUpSub.asObservable();
+
   constructor(private readonly http: HttpClient) {
   }
 
@@ -24,5 +27,12 @@ export class UserServiceService {
       this.getValidateUserSub.next(data);
     });
 
+  }
+
+
+  signUpUser(req: any) {
+    this.http.post<User>(environment.host + 'signUp', req, httpOptions).subscribe(data => {
+      this.signUpSub.next(data);
+    });
   }
 }

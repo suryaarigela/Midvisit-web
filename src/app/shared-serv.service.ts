@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SharedServService {
-
+  userName: string;
   user: string;
   isValidUser = false;
   logoutEvent: boolean = false;

@@ -10,10 +10,18 @@ import { SharedServService } from './shared-serv.service';
 export class AppComponent {
   title = 'portfolio';
 
-  userName = 'Surya'
+  userName = this.shared.userName;
   constructor(private readonly router: Router,
     private readonly shared: SharedServService) {
 
+  }
+
+  isUserAvailable() {
+    if (this.shared.userName !== undefined) {
+      return true;
+    } else {
+      return false;
+    }
   }
   goDashBoard() {
     this.router.navigate([''])

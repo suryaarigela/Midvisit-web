@@ -28,6 +28,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.userSub = this.userServ.getValidateUser$.subscribe(data => {
       if (!this.shared.logoutEvent && data && data.length > 0) {
+        data.forEach(user => {
+          this.shared.userName = user.userName
+        })
         this.shared.isValidUser = true;
         this.router.navigate(['']);
       } else {
