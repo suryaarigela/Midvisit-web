@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs/internal/Observable';
@@ -8,13 +8,19 @@ import { Speciality } from '../model/speciality';
 import { DoctorsService } from '../doctors.service';
 import { Doctor } from '../model/doctor';
 import { SharedServService } from '../shared-serv.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
+  ngOnDestroy(): void {
+    this.doctors = [];
+    this.getAllDocSub.unsubscribe();
+    this.getAllSpecSub.unsubscribe();
+  }
   doctors: Doctor[] = []
 
 
@@ -36,7 +42,8 @@ export class HomeComponent implements OnInit {
   signUp() {
     this.router.navigate(['signUp'])
   }
-
+  getAllDocSub: Subscription;
+  getAllSpecSub: Subscription
   searchControl: FormControl;
   insuranceSearch: FormControl;
   filteredResults$: Observable<string[]>;
@@ -57,10 +64,10 @@ export class HomeComponent implements OnInit {
       map(val => val.slice(0, 4)))
       ;
 
-    this.docServ.getAllDoc$.subscribe(docs => {
+    this.getAllDocSub = this.docServ.getAllDoc$.subscribe(docs => {
       this.doctors = docs;
     })
-    this.specialityServ.getAllSpec$.subscribe(data => {
+    this.getAllSpecSub = this.specialityServ.getAllSpec$.subscribe(data => {
 
       this.results = data.map(row => {
         return row.name;

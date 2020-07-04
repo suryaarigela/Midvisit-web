@@ -44,6 +44,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
+import { DoctorAvailabilityComponent } from './home/doctor-availability/doctor-availability.component';
 
 @NgModule({
   declarations: [
@@ -54,13 +55,15 @@ import { SettingsComponent } from './settings/settings.component';
     BoldPipe,
     DashboardComponent,
     ProfileComponent,
-    SettingsComponent
+    SettingsComponent,
+    DoctorAvailabilityComponent
   ],
   imports: [
     ReactiveFormsModule,
     MatButtonModule,
     MatMenuModule,
     MatToolbarModule,
+    MatChipsModule,
     MatIconModule,
     MatCardModule,
     MatFormFieldModule,
